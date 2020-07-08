@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "serve": "micro-dev -d .env index.js"
   },
   "dependencies": {
     "expo": "~38.0.8",
@@ -13,6 +14,8 @@
     "expo-media-library": "~8.2.1",
     "expo-status-bar": "^1.0.2",
     "micro": "^9.3.4",
+    "micro-dev": "^3.0.0",
+    "micro-ts-dev": "^0.1.1",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.1.tar.gz",
@@ -20,7 +23,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
-    "babel-preset-expo": "~8.1.0"
+    "aws-sdk": "^2.711.0",
+    "babel-preset-expo": "~8.1.0",
+    "dotenv": "^8.2.0",
+    "uuid": "^8.2.0"
   },
   "private": true
 }

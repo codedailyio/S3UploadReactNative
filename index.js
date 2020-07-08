@@ -1,13 +1,12 @@
-import S3 from "aws-sdk/clients/s3";
-import { Credentials } from "aws-sdk";
-import { v4 as uuid } from "uuid";
+const AWS = require("aws-sdk");
+const { v4: uuid } = require("uuid");
 
-const access = new Credentials({
+const access = new AWS.Credentials({
   accessKeyId: process.env.AWS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET,
 });
 
-const s3 = new S3({
+const s3 = new AWS.S3({
   credentials: access,
   region: process.env.S3_REGION, //"us-west-2"
   signatureVersion: "v4",

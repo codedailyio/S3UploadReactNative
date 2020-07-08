@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 
@@ -17,9 +17,12 @@ export const uploadImage = async (uploadUrl, data) => {
   });
 };
 
+const requestUpload = async () => {
+  return fetch("http://localhost:3000");
+};
+
 export default function App() {
   const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
   const camera = useRef();
 
   useEffect(() => {
@@ -35,17 +38,9 @@ export default function App() {
         quality: 1,
         exif: true,
       });
-      const asset = await MediaLibrary.createAssetAsync(photo.uri);
-      const album = await MediaLibrary.getAlbumAsync("AlbumName");
-      if (!album) {
-        await MediaLibrary.createAlbumAsync("AlbumName", asset, false);
-      } else {
-        await MediaLibrary.addAssetsToAlbumAsync(asset, album, false);
-      }
       const res = await requestUpload();
       const data = await res.json();
-      // make call to your server
-      await uploadImage(data.url, asset.uri);
+      await uploadImage(data.url, photo.uri);
     }
   };
 
@@ -76,7 +71,7 @@ export default function App() {
               alignItems: "center",
             }}
             onPress={() => {
-              await captureImage();
+              captureImage();
             }}
           >
             <Text style={{ fontSize: 18, marginBottom: 10, color: "white" }}>
