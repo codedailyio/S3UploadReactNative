@@ -8,7 +8,7 @@ const access = new AWS.Credentials({
 
 const s3 = new AWS.S3({
   credentials: access,
-  region: process.env.S3_REGION, //"us-west-2"
+  region: process.env.S3_REGION,
   signatureVersion: "v4",
 });
 
