@@ -34,7 +34,7 @@ export default function App() {
 
   const captureImage = async () => {
     if (camera.current) {
-      let photo = await camera.current.takePictureAsync({
+      const photo = await camera.current.takePictureAsync({
         quality: 1,
         exif: true,
       });
@@ -53,32 +53,19 @@ export default function App() {
   return (
     <View style={{ flex: 1 }}>
       <Camera
-        style={{ flex: 1 }}
+        style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         type={Camera.Constants.Type.back}
         ref={camera}
       >
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: "transparent",
-            flexDirection: "row",
+        <TouchableOpacity
+          onPress={() => {
+            captureImage();
           }}
         >
-          <TouchableOpacity
-            style={{
-              flex: 0.1,
-              alignSelf: "flex-end",
-              alignItems: "center",
-            }}
-            onPress={() => {
-              captureImage();
-            }}
-          >
-            <Text style={{ fontSize: 18, marginBottom: 10, color: "white" }}>
-              Click
-            </Text>
-          </TouchableOpacity>
-        </View>
+          <Text style={{ fontSize: 18, marginBottom: 10, color: "white" }}>
+            Capture
+          </Text>
+        </TouchableOpacity>
       </Camera>
     </View>
   );
